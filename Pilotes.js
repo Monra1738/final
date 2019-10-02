@@ -1,7 +1,9 @@
+
+
 function Pilotes(x, y){//inicialitzar particules
     this.pos = createVector(random(width), random(height));
-    this.target = createVector(x, y);
-    this.vel= p5.Vector.random2D();
+    this.target = createVector(x, y); 
+    this.vel= p5.Vector.random2D();//crea la velocitat a vertir d un vector aleatori
     this.acc= createVector();
     this.r=8;
     this.maxspeed=5;
@@ -37,7 +39,7 @@ Pilotes.prototype.arrive=function (target) {
     var d=desired.mag();
     var speed=this.maxspeed;
     if(d<100){
-        speed=map(d,0,100,0,this.maxspeed);
+        speed=map(d,0,100,0,this.maxspeed);//agafem els valors del rang
     }
     desired.setMag(speed);//et doble el valor
     var steer=p5.Vector.sub(desired,this.vel);
@@ -48,10 +50,10 @@ Pilotes.prototype.flee = function(target) {
     var desired = p5.Vector.sub(target, this.pos);
     var d = desired.mag();//	agafa la  magnitud o longitud
     if (d < 50) {
-      desired.setMag(this.maxspeed);
+      desired.setMag(this.maxspeed);//definim el valor maxim que pot arrviar
       desired.mult(-1);
-      var steer = p5.Vector.sub(desired, this.vel);
-      steer.limit(this.maxforce);
+      var steer = p5.Vector.sub(desired, this.vel);//restem el valor i posem el valor nou
+      steer.limit(this.maxforce);// posem el limit perque les voles no passin
       return steer;
     } else {
       return createVector(0, 0);
